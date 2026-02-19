@@ -1,3 +1,4 @@
+import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict
@@ -116,5 +117,24 @@ def train(
                 },
                 best_path,
             )
+
+    import json
+
+    # Save metrics for DVC tracking
+    metrics_path = run_dir / "metrics.json"
+    with open(metrics_path, "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "best_acc": best_acc,
+                "epochs": cfg.epochs,
+                "lr": cfg.lr,
+                "weight_decay": cfg.weight_decay,
+                "run_name": cfg.run_name,
+            },
+            f,
+            indent=2,
+        )
+
+    print(f"Saved metrics to {metrics_path}")
 
     return {"best_acc": best_acc, "checkpoint": str(best_path)}
