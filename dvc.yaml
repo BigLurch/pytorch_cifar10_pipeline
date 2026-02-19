@@ -1,0 +1,36 @@
+stages:
+  exp1:
+    cmd: uv run python main.py train --config configs/exp1.yaml
+    deps:
+      - main.py
+      - src/k2
+      - configs/exp1.yaml
+      - dl/cifar10
+    outs:
+      - outputs/exp1
+    metrics:
+      - outputs/exp1/metrics.json:
+
+  exp2:
+    cmd: uv run python main.py train --config configs/exp2.yaml
+    deps:
+      - main.py
+      - src/k2
+      - configs/exp2.yaml
+      - dl/cifar10
+    outs:
+      - outputs/exp2
+    metrics:
+      - outputs/exp2/metrics.json:
+
+  exp3:
+    cmd: uv run python main.py train --config configs/exp3.yaml
+    deps:
+      - main.py
+      - src/k2
+      - configs/exp3.yaml
+      - dl/cifar10
+    outs:
+      - outputs/exp3
+    metrics:
+      - outputs/exp3/metrics.json:
