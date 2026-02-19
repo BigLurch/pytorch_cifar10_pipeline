@@ -48,3 +48,19 @@ uv run python main.py train --run-name exp1 --epochs 3 --lr 1e-3 --batch-size 12
 ```bash
 uv run python main.py eval --ckpt outputs/exp1/best.pt
 ```
+
+## Experiment
+
+| Experiment | Config    | Learning Rate | Batch Size | Weight Decay | Epochs | Best Accuracy |
+| ---------- | --------- | ------------- | ---------- | ------------ | ------ | ------------- |
+| Exp 1      | exp1.yaml | 0.0010        | 128        | 0.0          | 3      | 0.6714        |
+| Exp 2      | exp2.yaml | 0.0030        | 128        | 0.0005       | 3      | 0.6009        |
+| Exp 3      | exp3.yaml | 0.0007        | 256        | 0.0005       | 3      | 0.6045        |
+
+### Köra experiment via config
+
+```bash
+uv run python main.py train --config configs/exp1.yaml
+uv run python main.py train --config configs/exp2.yaml
+uv run python main.py train --config configs/exp3.yaml
+```
