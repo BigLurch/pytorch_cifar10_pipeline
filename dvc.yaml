@@ -9,7 +9,7 @@ stages:
     outs:
       - outputs/exp1
     metrics:
-      - outputs/exp1/metrics.json:
+      - outputs/exp1/metrics.json: {}
 
   exp2:
     cmd: uv run python main.py train --config configs/exp2.yaml
@@ -21,7 +21,7 @@ stages:
     outs:
       - outputs/exp2
     metrics:
-      - outputs/exp2/metrics.json:
+      - outputs/exp2/metrics.json: {}
 
   exp3:
     cmd: uv run python main.py train --config configs/exp3.yaml
@@ -33,4 +33,4 @@ stages:
     outs:
       - outputs/exp3
     metrics:
-      - outputs/exp3/metrics.json:
+      - outputs/exp3/metrics.json: {}
