@@ -121,7 +121,9 @@ def train(
     import json
 
     # Save metrics for DVC tracking
-    metrics_path = run_dir / "metrics.json"
+    metrics_dir = Path("metrics")
+    metrics_dir.mkdir(parents=True, exist_ok=True)
+    metrics_path = metrics_dir / f"{cfg.run_name}.json"
     with open(metrics_path, "w", encoding="utf-8") as f:
         json.dump(
             {

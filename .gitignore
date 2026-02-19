@@ -22,3 +22,4 @@ logs/
 
 # DVC (vi lägger till senare, men bra att förbereda)
 .dvc/cache/
+metrics/
