@@ -13,7 +13,7 @@ Modulär och reproducerbar Deep Learning-pipeline byggd i PyTorch med:
 ### 1. Klona repot
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/BigLurch/pytorch_cifar10_pipeline.git
 cd pytorch_cifar10_pipeline
 ```
 
