@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Envs / uv
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data / artifacts
+dl/*
+!dl/*.dvc
+outputs/
+logs/
+
+# DVC (vi lägger till senare, men bra att förbereda)
+.dvc/cache/
