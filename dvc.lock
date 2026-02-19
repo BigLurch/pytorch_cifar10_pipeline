@@ -1,0 +1,92 @@
+schema: '2.0'
+stages:
+  exp1:
+    cmd: uv run python main.py train --config configs/exp1.yaml
+    deps:
+    - path: configs/exp1.yaml
+      hash: md5
+      md5: 8ef60930489bb99338d4b1e18e018d95
+      size: 169
+    - path: dl/cifar10
+      hash: md5
+      md5: e252d2c8ba36d1ab3e21a873ab62daa3.dir
+      size: 356712185
+      nfiles: 9
+    - path: main.py
+      hash: md5
+      md5: 0061ec1dfe71c6edefb58335a1375adb
+      size: 4213
+    - path: src/k2
+      hash: md5
+      md5: 2ec53095e7b0dd40ea51f58180ae375f.dir
+      size: 22694
+      nfiles: 10
+    outs:
+    - path: metrics/exp1.json
+      hash: md5
+      md5: 81332441b6e026272386f219d9f05f9f
+      size: 105
+    - path: outputs/exp1/best.pt
+      hash: md5
+      md5: adaff0d12ba704129837d51f123f3388
+      size: 2485525
+  exp2:
+    cmd: uv run python main.py train --config configs/exp2.yaml
+    deps:
+    - path: configs/exp2.yaml
+      hash: md5
+      md5: 5545114857df1a8e0f945590bc865453
+      size: 172
+    - path: dl/cifar10
+      hash: md5
+      md5: e252d2c8ba36d1ab3e21a873ab62daa3.dir
+      size: 356712185
+      nfiles: 9
+    - path: main.py
+      hash: md5
+      md5: 0061ec1dfe71c6edefb58335a1375adb
+      size: 4213
+    - path: src/k2
+      hash: md5
+      md5: 2ec53095e7b0dd40ea51f58180ae375f.dir
+      size: 22694
+      nfiles: 10
+    outs:
+    - path: metrics/exp2.json
+      hash: md5
+      md5: d35531854ffe03ecb2367fbcd903625b
+      size: 108
+    - path: outputs/exp2/best.pt
+      hash: md5
+      md5: 6b3badb8731b2bd9d63bb407a3f798b4
+      size: 2485525
+  exp3:
+    cmd: uv run python main.py train --config configs/exp3.yaml
+    deps:
+    - path: configs/exp3.yaml
+      hash: md5
+      md5: d2abef1b07a0ed079e4c73dcb84b8b1f
+      size: 173
+    - path: dl/cifar10
+      hash: md5
+      md5: e252d2c8ba36d1ab3e21a873ab62daa3.dir
+      size: 356712185
+      nfiles: 9
+    - path: main.py
+      hash: md5
+      md5: 0061ec1dfe71c6edefb58335a1375adb
+      size: 4213
+    - path: src/k2
+      hash: md5
+      md5: 2ec53095e7b0dd40ea51f58180ae375f.dir
+      size: 22694
+      nfiles: 10
+    outs:
+    - path: metrics/exp3.json
+      hash: md5
+      md5: 8cab55cfff653dab1849978acdb86986
+      size: 109
+    - path: outputs/exp3/best.pt
+      hash: md5
+      md5: 578a37216e6e89b2157fde7d67b7d312
+      size: 2485525
