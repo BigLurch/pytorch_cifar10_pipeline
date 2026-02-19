@@ -53,9 +53,9 @@ uv run python main.py eval --ckpt outputs/exp1/best.pt
 
 | Experiment | Config    | Learning Rate | Batch Size | Weight Decay | Epochs | Best Accuracy |
 | ---------- | --------- | ------------- | ---------- | ------------ | ------ | ------------- |
-| Exp 1      | exp1.yaml | 0.0010        | 128        | 0.0          | 3      | 0.6714        |
-| Exp 2      | exp2.yaml | 0.0030        | 128        | 0.0005       | 3      | 0.6009        |
-| Exp 3      | exp3.yaml | 0.0007        | 256        | 0.0005       | 3      | 0.6045        |
+| Exp 1      | exp1.yaml | 0.0010        | 128        | 0.0          | 3      | 0.6788        |
+| Exp 2      | exp2.yaml | 0.0030        | 128        | 0.0005       | 3      | 0.6310        |
+| Exp 3      | exp3.yaml | 0.0007        | 256        | 0.0005       | 3      | 0.5966        |
 
 ### Köra experiment via config
 
