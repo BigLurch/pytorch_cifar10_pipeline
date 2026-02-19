@@ -1,6 +1,7 @@
 import argparse
 from pathlib import Path
 
+import yaml
 from torchvision.datasets import CIFAR10
 
 from src.k2.dataset import DataConfig, make_dataloaders
@@ -9,11 +10,16 @@ from src.k2.model import SimpleCNN
 from src.k2.train import TrainConfig, train
 
 
+def load_yaml(path: Path) -> dict:
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
 def download_cifar10(data_dir: Path) -> None:
     data_dir.mkdir(parents=True, exist_ok=True)
     CIFAR10(root=str(data_dir), train=True, download=True)
     CIFAR10(root=str(data_dir), train=False, download=True)
-    print(f"✅ CIFAR-10 downloaded to: {data_dir.resolve()}")
+    print(f"CIFAR-10 downloaded to: {data_dir.resolve()}")
 
 
 def main():
@@ -32,6 +38,9 @@ def main():
     p_train.add_argument("--run-name", type=str, default="exp1")
     p_train.add_argument("--device", type=str, default="auto")
     p_train.add_argument("--seed", type=int, default=42)
+    p_train.add_argument(
+        "--config", type=Path, default=None, help="Path to YAML config"
+    )
 
     p_eval = sub.add_parser("eval", help="Evaluate a saved checkpoint")
     p_eval.add_argument("--data-dir", type=Path, default=Path("dl/cifar10"))
@@ -46,6 +55,33 @@ def main():
         return
 
     if args.cmd == "train":
+        if args.config is not None:
+            cfg = load_yaml(args.config)
+
+            d = cfg.get("data", {})
+            t = cfg.get("train", {})
+
+            dcfg = DataConfig(
+                data_dir=Path(d.get("data_dir", "dl/cifar10")),
+                batch_size=int(d.get("batch_size", 128)),
+                num_workers=int(d.get("num_workers", 2)),
+            )
+            train_loader, test_loader = make_dataloaders(dcfg)
+
+            model = SimpleCNN(num_classes=10)
+            tcfg = TrainConfig(
+                run_name=str(t.get("run_name", "exp")),
+                epochs=int(t.get("epochs", 3)),
+                lr=float(t.get("lr", 1e-3)),
+                weight_decay=float(t.get("weight_decay", 0.0)),
+                device=str(t.get("device", "auto")),
+                seed=int(t.get("seed", 42)),
+            )
+            out = train(model, train_loader, test_loader, tcfg)
+            print(f"Done. best_acc={out['best_acc']:.4f} ckpt={out['checkpoint']}")
+            return
+
+        # fallback: old CLI args
         dcfg = DataConfig(data_dir=args.data_dir, batch_size=args.batch_size)
         train_loader, test_loader = make_dataloaders(dcfg)
 
@@ -59,7 +95,7 @@ def main():
             seed=args.seed,
         )
         out = train(model, train_loader, test_loader, tcfg)
-        print(f"✅ Done. best_acc={out['best_acc']:.4f} ckpt={out['checkpoint']}")
+        print(f"Done. best_acc={out['best_acc']:.4f} ckpt={out['checkpoint']}")
         return
 
     if args.cmd == "eval":
@@ -68,7 +104,7 @@ def main():
 
         model = SimpleCNN(num_classes=10)
         metrics = eval_checkpoint(model, test_loader, args.ckpt, device=args.device)
-        print(f"✅ Eval: loss={metrics['loss']:.4f} acc={metrics['acc']:.4f}")
+        print(f"Eval: loss={metrics['loss']:.4f} acc={metrics['acc']:.4f}")
         return
 
     raise ValueError("Unknown command")

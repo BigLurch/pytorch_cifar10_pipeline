@@ -1,0 +1,11 @@
+data:
+  data_dir: dl/cifar10
+  batch_size: 128
+  num_workers: 2
+train:
+  run_name: exp2
+  epochs: 3
+  lr: 0.003
+  weight_decay: 0.0005
+  device: auto
+  seed: 42
