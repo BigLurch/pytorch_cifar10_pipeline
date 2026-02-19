@@ -23,8 +23,28 @@ cd pytorch_cifar10_pipeline
 uv sync
 ```
 
-## Hämta dataset (DVC)
+### 3. Hämta dataset (DVC)
 
 ```bash
 uv run dvc pull
+```
+
+## Köra pipeline
+
+### 1. Ladda ner data (om du inte kör DVC pull)
+
+```bash
+uv run python main.py download-data --data-dir dl/cifar10
+```
+
+### 2. Träna baseline
+
+```bash
+uv run python main.py train --run-name exp1 --epochs 3 --lr 1e-3 --batch-size 128
+```
+
+### 3. Evaluera checkpoint
+
+```bash
+uv run python main.py eval --ckpt outputs/exp1/best.pt
 ```
